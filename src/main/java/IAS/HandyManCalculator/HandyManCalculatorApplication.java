@@ -12,7 +12,7 @@ public class HandyManCalculatorApplication {
 
 	public static void main(String[] args) {
 
-		Date date1 = new Date(1220227200);
+		Date date1 = new Date(1220227200 * 1000L);
 		Date date2 = new Date();
 
 		ArrayList dateList = new ArrayList();
@@ -25,5 +25,8 @@ public class HandyManCalculatorApplication {
 		SpringApplication.run(HandyManCalculatorApplication.class, args);
 		CalculateTime time = new CalculateTime(al);
 		time.calculateWeekNumber(al);
+		time.calculateHours(al);
+		time.calculateInitialDate(al);
+		time.calculateFinalDate(al);
 	}
 }
