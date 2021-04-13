@@ -27,16 +27,16 @@ public class CalculateTime {
 //        }
 //    }
 
-    public List<Date> calculateWeekNumber(List<Date> date) {
+    public ArrayList<Integer> calculateWeekNumber(List<Date> date) {
         Calendar calendar = Calendar.getInstance();
-        List<Date> result = new ArrayList<>();
-        for (Date d: date
-             ) {
+        int weekNumber = 0;
+        ArrayList<Integer> result = new ArrayList();
+        for (Date d: date) {
             calendar.setTime(d);
-            calendar.get(Calendar.WEEK_OF_YEAR);
+            weekNumber = calendar.get(Calendar.WEEK_OF_YEAR);
+            result.add(weekNumber);
         }
-        //int weekNumber =
-        System.out.println("This is weekNumber from calculateWeek from the calculateTime class + weekNumber: " + result);
+        System.out.println("This is weekNumber from calculateWeek from the calculateTime class + result: " + result);
         return result;
     }
 
