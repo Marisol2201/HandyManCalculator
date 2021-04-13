@@ -1,4 +1,5 @@
 package IAS.HandyManCalculator.model;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,19 +13,17 @@ public class CalculateTime {
         this.date = date;
     }
 
-
+    //Hacer esto mañana
+//    public ArrayList<Integer> sumHoursToEachWeek(List<Date> date) {
 //        Calendar calendar = Calendar.getInstance();
-//        for (Date d: date
-//        ) {
+//        ArrayList<Integer> result = new ArrayList();
+//        for (Date d: date) {
 //            calendar.setTime(d);
-//            if(date.before(finalTime) || (initialTime.equals(finalTime))) {
-//                calculateWeekNumber(initialTime);
-//                System.out.println("This is initialTime from the calculateTime class + initialTime: " + initialTime);
-//                System.out.println("This is finalTime from the calculateTime class + finalTime: " + finalTime);
+//            int weekNumberForEachDay = calendar.get(Calendar.WEEK_OF_YEAR);
+//            result.add(weekNumberForEachDay);
 //        }
-//        } else {
-//            System.out.println("Error from CalculateTime class");
-//        }
+//        //System.out.println("This is weekNumber from calculateWeekNumber from the calculateTime class + result: " + result);
+//        return result;
 //    }
 
     public ArrayList<Integer> calculateWeekNumber(List<Date> date) {
@@ -39,28 +38,22 @@ public class CalculateTime {
         return result;
     }
 
-    public ArrayList<Integer> calculateHours(List<Date> date) {
-        Calendar calendar = Calendar.getInstance();
-        ArrayList<Integer> result = new ArrayList();
-        for (Date d: date) {
-            calendar.setTime(d);
-            int weekSumHours = calendar.get(Calendar.HOUR);
-            result.add(weekSumHours);
-        }
-        //System.out.println("This is sumHours from calculateHours from the calculateTime class + result: " + result);
-        return result;
-    }
-    public ArrayList<Date> calculateInitialDate(List<Date> date) {
-        ArrayList<Date> result = new ArrayList();
-        result.add(date.get(0));
+    public Date calculateInitialDate(List<Date> date) {
+        Date result = (date.get(0));
         //System.out.println("This is result from calculateInitialDate from the calculateTime class + result: " + result);
         return result;
     }
 
-    public ArrayList<Date> calculateFinalDate(List<Date> date) {
-        ArrayList<Date> result = new ArrayList();
-        result.add(date.get(date.size() - 1));
+    public Date calculateFinalDate(List<Date> date) {
+        Date result = (date.get(date.size() - 1));
         //System.out.println("This is result from calculateFinalDate from the calculateTime class + result: " + result);
         return result;
+    }
+
+    public int differenceInHoursBetweenDates(Date startDate, Date endDate) {
+        long diff = endDate.getTime() - startDate.getTime();
+        int hoursDifference = (int) (diff/(60 * 60 *1000));
+        //System.out.println("This is difference from differenceBetweenDates from the calculateTime class + difference: " + hoursDifference);
+        return hoursDifference;
     }
 }
