@@ -1,6 +1,6 @@
-package IAS.HandyManCalculator.model.technician;
+package IAS.HandyManCalculator.model.week;
 
-public class CreateTechnicianOperationInput {
+public class CreateWeekOperationInput {
     private String name;
 
     public String getName() {

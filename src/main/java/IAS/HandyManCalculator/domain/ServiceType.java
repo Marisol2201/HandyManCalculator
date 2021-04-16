@@ -4,11 +4,11 @@ import IAS.HandyManCalculator.commons.Validate;
 
 import java.util.UUID;
 
-public class Week {
+public class ServiceType {
     private final UUID id;
     private final String name;
 
-    public Week(UUID id, String name) {
+    public ServiceType(UUID id, String name) {
         Validate.checkNotNull(id);
         Validate.checkNotNull(name);
         this.id = id;
@@ -26,7 +26,7 @@ public class Week {
 
     @Override
     public String toString() {
-        return "Week{" +
+        return "ServiceType{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

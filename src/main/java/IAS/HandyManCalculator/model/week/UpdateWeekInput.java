@@ -1,8 +1,8 @@
-package IAS.HandyManCalculator.model.technician;
+package IAS.HandyManCalculator.model.week;
 
 import java.util.UUID;
 
-public class UpdateTechnicianInput {
+public class UpdateWeekInput {
     private UUID id;
     private String name;
 

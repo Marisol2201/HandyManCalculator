@@ -1,4 +1,4 @@
-package IAS.HandyManCalculator.repository.technician;
+package IAS.HandyManCalculator.repository;
 
 import java.util.List;
 import java.util.Optional;

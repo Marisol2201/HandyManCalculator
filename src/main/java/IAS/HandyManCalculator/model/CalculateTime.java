@@ -13,18 +13,18 @@ public class CalculateTime {
         this.date = date;
     }
 
-    //Hacer esto mañana
-//    public ArrayList<Integer> sumHoursToEachWeek(List<Date> date) {
-//        Calendar calendar = Calendar.getInstance();
-//        ArrayList<Integer> result = new ArrayList();
-//        for (Date d: date) {
-//            calendar.setTime(d);
-//            int weekNumberForEachDay = calendar.get(Calendar.WEEK_OF_YEAR);
-//            result.add(weekNumberForEachDay);
-//        }
-//        //System.out.println("This is weekNumber from calculateWeekNumber from the calculateTime class + result: " + result);
-//        return result;
-//    }
+
+    public ArrayList<Integer> sumHoursToEachWeek(List<Date> date) {
+        Calendar calendar = Calendar.getInstance();
+        ArrayList<Integer> result = new ArrayList();
+        for (Date d: date) {
+            calendar.setTime(d);
+            int weekNumberForEachDay = calendar.get(Calendar.WEEK_OF_YEAR);
+            result.add(weekNumberForEachDay);
+        }
+        //System.out.println("This is weekNumber from calculateWeekNumber from the calculateTime class + result: " + result);
+        return result;
+    }
 
     public ArrayList<Integer> calculateWeekNumber(List<Date> date) {
         Calendar calendar = Calendar.getInstance();

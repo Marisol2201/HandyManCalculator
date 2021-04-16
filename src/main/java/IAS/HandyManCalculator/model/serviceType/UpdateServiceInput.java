@@ -1,8 +1,8 @@
-package IAS.HandyManCalculator.model.technician;
+package IAS.HandyManCalculator.model.serviceType;
 
 import java.util.UUID;
 
-public class UpdateTechnicianInput {
+public class UpdateServiceInput {
     private UUID id;
     private String name;
 

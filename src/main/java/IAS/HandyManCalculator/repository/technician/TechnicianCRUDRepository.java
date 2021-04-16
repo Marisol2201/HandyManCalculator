@@ -1,6 +1,7 @@
 package IAS.HandyManCalculator.repository.technician;
 
 import IAS.HandyManCalculator.domain.Technician;
+import IAS.HandyManCalculator.repository.CrudRepository;
 
 import java.util.UUID;
 

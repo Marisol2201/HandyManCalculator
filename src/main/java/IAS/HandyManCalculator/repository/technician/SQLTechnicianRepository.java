@@ -25,7 +25,7 @@ public class SQLTechnicianRepository implements IAS.HandyManCalculator.repositor
     }
 
     public void storeTechnician(Technician technician) {
-        String sql = "INSERT INTO PRODUCTS(id, name) VALUES (?, ?)";
+        String sql = "INSERT INTO TECHNICIANS(id, name) VALUES (?, ?)";
         PreparedStatementSetter preparedStatementSetter = ps -> {
             ps.setString(1, technician.getId().toString());
             ps.setString(2, technician.getName());
@@ -35,7 +35,7 @@ public class SQLTechnicianRepository implements IAS.HandyManCalculator.repositor
 
 
     public List<Technician> listTechnicians() {
-        String sql = "SELECT * FROM PRODUCTS";
+        String sql = "SELECT * FROM TECHNICIANS";
         return jdbcTemplate.query(sql, this::technicianRowMapper);
     }
 
@@ -48,7 +48,7 @@ public class SQLTechnicianRepository implements IAS.HandyManCalculator.repositor
 
 
     public Optional<Technician> findTechnicianById(UUID id) {
-        String sql = "SELECT * FROM PRODUCTS WHERE id = ?";
+        String sql = "SELECT * FROM TECHNICIANS WHERE id = ?";
         PreparedStatementSetter setter = ps -> ps.setString(1, id.toString());
         List<Technician> technicians = jdbcTemplate.query(sql, setter, this::technicianRowMapper);
         Technician unsafeTechnician = DataAccessUtils.singleResult(technicians);
@@ -56,7 +56,7 @@ public class SQLTechnicianRepository implements IAS.HandyManCalculator.repositor
     }
 
     public void updateTechnician(Technician technicianUpdate) {
-        String sql = "UPDATE PRODUCTS SET name = :name WHERE id = :id";
+        String sql = "UPDATE TECHNICIANS SET name = :name WHERE id = :id";
         Map<String, Object> parameters = Map.of(
                 "id", technicianUpdate.getId().toString(),
                 "name", technicianUpdate.getName()
@@ -65,7 +65,7 @@ public class SQLTechnicianRepository implements IAS.HandyManCalculator.repositor
     }
 
     public void deleteTechnician(UUID id) {
-        String sql = "DELETE FROM PRODUCTS WHERE id = ?";
+        String sql = "DELETE FROM TECHNICIANS WHERE id = ?";
         PreparedStatementSetter setter = ps -> ps.setString(1, id.toString());
         jdbcTemplate.update(sql, setter);
     }

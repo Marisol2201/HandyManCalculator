@@ -17,7 +17,7 @@ public class CreateTechnicianOperationOutput {
 
     @Override
     public String toString() {
-        return "CreateTechnicianOperationOutput{" +
+        return "CreateWeekOperationOutput{" +
                 "technician=" + technician +
                 '}';
     }
