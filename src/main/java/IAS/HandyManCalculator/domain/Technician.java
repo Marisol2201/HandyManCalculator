@@ -1,42 +1,34 @@
 package IAS.HandyManCalculator.domain;
-import java.util.Objects;
+
+import IAS.HandyManCalculator.commons.Validate;
+
 import java.util.UUID;
 
 public class Technician {
-    private final UUID idTechnician;
-    private final String nameTechnician;
+    private final UUID id;
+    private final String name;
 
-    public Technician(UUID idTechnician, String nameTechnician) {
-        this.idTechnician = idTechnician;
-        this.nameTechnician = nameTechnician;
+    public Technician(UUID id, String name) {
+        Validate.checkNotNull(id);
+        Validate.checkNotNull(name);
+        this.id = id;
+        this.name = name;
     }
 
-    public UUID getIdTechnician() {
-        return idTechnician;
+    public UUID getId() {
+        return id;
     }
 
-    public String getNameTechnician() {
-        return nameTechnician;
+    public String getName() {
+        return name;
     }
+
 
     @Override
     public String toString() {
         return "Technician{" +
-                "idTechnician=" + idTechnician + '\'' +
-                ", nameTechnician='" + nameTechnician + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Technician that = (Technician) o;
-        return Objects.equals(idTechnician, that.idTechnician) && Objects.equals(nameTechnician, that.nameTechnician);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idTechnician, nameTechnician);
     }
 }
