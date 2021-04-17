@@ -6,5 +6,5 @@ import IAS.HandyManCalculator.repository.CrudRepository;
 import java.util.UUID;
 
 // This is an exploration class
-public interface ServiceCRUDRepository extends CrudRepository<ServiceType, UUID> {
+public interface ServiceTypeCRUDRepository extends CrudRepository<ServiceType, UUID> {
 }

@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 // This is an exploration class
-public class SQLServiceCrudRepository implements ServiceCRUDRepository {
+public class SQLServiceTypeCrudRepository implements ServiceTypeCRUDRepository {
     @Override
     public void store(ServiceType item) {
 

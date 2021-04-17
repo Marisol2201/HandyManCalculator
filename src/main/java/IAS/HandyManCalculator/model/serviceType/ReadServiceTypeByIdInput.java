@@ -4,10 +4,10 @@ import IAS.HandyManCalculator.commons.Validate;
 
 import java.util.UUID;
 
-public class ReadServiceByIdInput {
+public class ReadServiceTypeByIdInput {
     private final UUID id;
 
-    public ReadServiceByIdInput(UUID id) {
+    public ReadServiceTypeByIdInput(UUID id) {
         Validate.checkNotNull(id);
         this.id = id;
     }

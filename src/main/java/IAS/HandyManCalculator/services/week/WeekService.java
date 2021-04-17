@@ -1,10 +1,7 @@
 package IAS.HandyManCalculator.services.week;
 
 import IAS.HandyManCalculator.domain.Week;
-import IAS.HandyManCalculator.model.week.DeleteWeekInput;
-import IAS.HandyManCalculator.model.week.DeleteWeekOutput;
-import IAS.HandyManCalculator.model.week.UpdateWeekInput;
-import IAS.HandyManCalculator.model.week.UpdateWeekOutput;
+import IAS.HandyManCalculator.model.week.*;
 import IAS.HandyManCalculator.repository.week.WeekRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +17,30 @@ public class WeekService {
         this.repository = repository;
     }
 
+    public CreateWeekOperationOutput createWeek(CreateWeekOperationInput input) {
+        UUID productId = UUID.randomUUID();
+        Week product = new Week(
+                productId,
+                input.getName()
+    );
+        repository.storeWeek(product);
+        return new CreateWeekOperationOutput(product);
+    }
+
     public List<Week> listWeeks() {
         return repository.listWeeks();
     }
 
-
+    public Optional<ReadWeekByIdOutput> readWeekByIdOperation(ReadWeekByIdInput input) {
+        Optional<Week> productById = repository.findWeekById(input.getId());
+        if (productById.isPresent()) {
+            Week product = productById.get();
+            ReadWeekByIdOutput output = new ReadWeekByIdOutput(product);
+            return Optional.of(output);
+        } else {
+            return Optional.empty();
+        }
+    }
 
     public UpdateWeekOutput updateWeekOperation(
             UpdateWeekInput input

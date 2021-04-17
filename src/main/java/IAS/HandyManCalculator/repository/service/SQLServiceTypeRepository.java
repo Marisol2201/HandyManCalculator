@@ -15,11 +15,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class SQLServiceRepository implements ServiceRepository {
+public class SQLServiceTypeRepository implements ServiceTypeRepository {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public SQLServiceRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public SQLServiceTypeRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }

@@ -5,14 +5,14 @@ public class OperationResult<V> {
         return new OperationResult<>(null, value);
     }
 
-    public static <VALUE> OperationResult<VALUE> ofError(IAS.HandyManCalculator.commons.OperationError error) {
+    public static <VALUE> OperationResult<VALUE> ofError(OperationError error) {
         return new OperationResult<>(error, null);
     }
 
-    private final IAS.HandyManCalculator.commons.OperationError error;
+    private final OperationError error;
     private final V value;
 
-    private OperationResult(IAS.HandyManCalculator.commons.OperationError error, V value) {
+    private OperationResult(OperationError error, V value) {
         this.error = error;
         this.value = value;
     }

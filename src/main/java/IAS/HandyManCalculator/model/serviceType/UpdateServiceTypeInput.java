@@ -2,7 +2,7 @@ package IAS.HandyManCalculator.model.serviceType;
 
 import java.util.UUID;
 
-public class UpdateServiceInput {
+public class UpdateServiceTypeInput {
     private UUID id;
     private String name;
 

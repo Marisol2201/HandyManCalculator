@@ -1,6 +1,6 @@
 package IAS.HandyManCalculator.model.serviceType;
 
-public class CreateServiceOperationInput {
+public class CreateServiceTypeOperationInput {
     private String name;
 
     public String getName() {

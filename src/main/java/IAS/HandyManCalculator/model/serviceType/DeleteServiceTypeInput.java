@@ -4,10 +4,10 @@ import IAS.HandyManCalculator.commons.Validate;
 
 import java.util.UUID;
 
-public class DeleteServiceInput {
+public class DeleteServiceTypeInput {
     private final UUID serviceId;
 
-    public DeleteServiceInput(UUID serviceId) {
+    public DeleteServiceTypeInput(UUID serviceId) {
         Validate.checkNotNull(serviceId);
         this.serviceId = serviceId;
     }

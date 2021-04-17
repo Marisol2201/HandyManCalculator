@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class SQLWeekRepository implements IAS.HandyManCalculator.repository.week.WeekRepository {
+public class SQLWeekRepository implements WeekRepository {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 

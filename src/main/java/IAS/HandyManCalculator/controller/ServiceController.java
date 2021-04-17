@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import IAS.HandyManCalculator.commons.ControllerHandler;
 import IAS.HandyManCalculator.model.serviceType.*;
-import IAS.HandyManCalculator.services.serviceType.CreateServiceUseCase;
-import IAS.HandyManCalculator.services.serviceType.ServiceService;
-import IAS.HandyManCalculator.services.serviceType.ReadServiceByIdUseCase;
+import IAS.HandyManCalculator.services.serviceType.CreateServiceTypeUseCase;
+import IAS.HandyManCalculator.services.serviceType.ServiceTypeService;
+import IAS.HandyManCalculator.services.serviceType.ReadServiceTypeByIdUseCase;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,23 +15,23 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/services")
 public class ServiceController {
-    private final ServiceService service;
-    private final CreateServiceUseCase createService;
-    private final ReadServiceByIdUseCase readServiceByIdUseCase;
+    private final ServiceTypeService service;
+    private final CreateServiceTypeUseCase createService;
+    private final ReadServiceTypeByIdUseCase readServiceTypeByIdUseCase;
 
     public ServiceController(
-            ServiceService service,
-            CreateServiceUseCase createService,
-            ReadServiceByIdUseCase readServiceByIdUseCase
+            ServiceTypeService service,
+            CreateServiceTypeUseCase createService,
+            ReadServiceTypeByIdUseCase readServiceTypeByIdUseCase
     ) {
         this.service = service;
         this.createService = createService;
-        this.readServiceByIdUseCase = readServiceByIdUseCase;
+        this.readServiceTypeByIdUseCase = readServiceTypeByIdUseCase;
     }
 
     @PostMapping
     public ResponseEntity<Object> createService(
-            @RequestBody CreateServiceOperationInput input
+            @RequestBody CreateServiceTypeOperationInput input
     ) {
         return new ControllerHandler<>(
                 () -> input,
@@ -52,24 +52,24 @@ public class ServiceController {
         return new ControllerHandler<>(
                 () -> {
                     UUID uuid = UUID.fromString(id);
-                    return new ReadServiceByIdInput(uuid);
+                    return new ReadServiceTypeByIdInput(uuid);
                 },
-                readServiceByIdUseCase
+                readServiceTypeByIdUseCase
         )
                 .execute();
     }
 
     @PutMapping
-    public UpdateServiceOutput updateService(
-            @RequestBody UpdateServiceInput input
+    public UpdateServiceTypeOutput updateService(
+            @RequestBody UpdateServiceTypeInput input
     ) {
         return service.updateServiceOperation(input);
     }
 
     @DeleteMapping("/{serviceId}")
-    public DeleteServiceOutput deleteService(@PathVariable("serviceId") String unsafeServiceId) {
+    public DeleteServiceTypeOutput deleteService(@PathVariable("serviceId") String unsafeServiceId) {
         UUID serviceId = UUID.fromString(unsafeServiceId);
-        DeleteServiceInput input = new DeleteServiceInput(serviceId);
+        DeleteServiceTypeInput input = new DeleteServiceTypeInput(serviceId);
         return service.deleteServiceOperation(input);
     }
 }

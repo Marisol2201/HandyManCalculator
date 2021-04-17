@@ -3,10 +3,10 @@ package IAS.HandyManCalculator.model.serviceType;
 import IAS.HandyManCalculator.commons.Validate;
 import IAS.HandyManCalculator.domain.ServiceType;
 
-public class DeleteServiceOutput {
+public class DeleteServiceTypeOutput {
     private final ServiceType service;
 
-    public DeleteServiceOutput(ServiceType service) {
+    public DeleteServiceTypeOutput(ServiceType service) {
         Validate.checkNotNull(service);
         this.service = service;
     }

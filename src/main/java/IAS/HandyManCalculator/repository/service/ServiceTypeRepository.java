@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ServiceRepository {
+public interface ServiceTypeRepository {
     void storeService(ServiceType service);
 
     void updateService(ServiceType service);

@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class SQLTechnicianRepository implements IAS.HandyManCalculator.repository.technician.TechnicianRepository {
+public class SQLTechnicianRepository implements TechnicianRepository {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 

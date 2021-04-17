@@ -4,27 +4,27 @@ import IAS.HandyManCalculator.commons.OperationResult;
 import IAS.HandyManCalculator.commons.UseCase;
 import IAS.HandyManCalculator.domain.ServiceType;
 import IAS.HandyManCalculator.errors.ResourceNotFoundError;
-import IAS.HandyManCalculator.model.serviceType.DeleteServiceInput;
-import IAS.HandyManCalculator.model.serviceType.DeleteServiceOutput;
-import IAS.HandyManCalculator.repository.service.ServiceRepository;
+import IAS.HandyManCalculator.model.serviceType.DeleteServiceTypeInput;
+import IAS.HandyManCalculator.model.serviceType.DeleteServiceTypeOutput;
+import IAS.HandyManCalculator.repository.service.ServiceTypeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class DeleteServiceUseCase implements UseCase<DeleteServiceInput, DeleteServiceOutput> {
-    private final ServiceRepository repository;
+public class DeleteServiceTypeUseCase implements UseCase<DeleteServiceTypeInput, DeleteServiceTypeOutput> {
+    private final ServiceTypeRepository repository;
 
-    public DeleteServiceUseCase(ServiceRepository repository) {
+    public DeleteServiceTypeUseCase(ServiceTypeRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public OperationResult<DeleteServiceOutput> execute(DeleteServiceInput input) {
+    public OperationResult<DeleteServiceTypeOutput> execute(DeleteServiceTypeInput input) {
         Optional<ServiceType> serviceById = repository.findServiceById(input.getServiceId());
         if (serviceById.isPresent()) {
             ServiceType service = serviceById.get();
-            DeleteServiceOutput output = new DeleteServiceOutput(service);
+            DeleteServiceTypeOutput output = new DeleteServiceTypeOutput(service);
             return OperationResult.ofValue(output);
         } else {
             String errorMessage = "ServiceType with id: " + input.getServiceId() + " does not exists";
