@@ -22,13 +22,13 @@ public class TechnicianService {
     }
 
     public CreateTechnicianOperationOutput createTechnician(CreateTechnicianOperationInput input) {
-        UUID productId = UUID.randomUUID();
-        Technician product = new Technician(
-                productId,
+        UUID technicianId = UUID.randomUUID();
+        Technician technician = new Technician(
+                technicianId,
                 input.getName()
         );
-        repository.storeTechnician(product);
-        return new CreateTechnicianOperationOutput(product);
+        repository.storeTechnician(technician);
+        return new CreateTechnicianOperationOutput(technician);
     }
 
     public List<Technician> listTechnicians() {
@@ -36,10 +36,10 @@ public class TechnicianService {
     }
 
     public Optional<ReadTechnicianByIdOutput> readTechnicianByIdOperation(ReadTechnicianByIdInput input) {
-        Optional<Technician> productById = repository.findTechnicianById(input.getId());
-        if (productById.isPresent()) {
-            Technician product = productById.get();
-            ReadTechnicianByIdOutput output = new ReadTechnicianByIdOutput(product);
+        Optional<Technician> technicianById = repository.findTechnicianById(input.getId());
+        if (technicianById.isPresent()) {
+            Technician technician = technicianById.get();
+            ReadTechnicianByIdOutput output = new ReadTechnicianByIdOutput(technician);
             return Optional.of(output);
         } else {
             return Optional.empty();

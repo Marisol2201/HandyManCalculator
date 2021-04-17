@@ -18,13 +18,13 @@ public class WeekService {
     }
 
     public CreateWeekOperationOutput createWeek(CreateWeekOperationInput input) {
-        UUID productId = UUID.randomUUID();
-        Week product = new Week(
-                productId,
+        UUID weekId = UUID.randomUUID();
+        Week week = new Week(
+                weekId,
                 input.getName()
     );
-        repository.storeWeek(product);
-        return new CreateWeekOperationOutput(product);
+        repository.storeWeek(week);
+        return new CreateWeekOperationOutput(week);
     }
 
     public List<Week> listWeeks() {
@@ -32,10 +32,10 @@ public class WeekService {
     }
 
     public Optional<ReadWeekByIdOutput> readWeekByIdOperation(ReadWeekByIdInput input) {
-        Optional<Week> productById = repository.findWeekById(input.getId());
-        if (productById.isPresent()) {
-            Week product = productById.get();
-            ReadWeekByIdOutput output = new ReadWeekByIdOutput(product);
+        Optional<Week> weekById = repository.findWeekById(input.getId());
+        if (weekById.isPresent()) {
+            Week week = weekById.get();
+            ReadWeekByIdOutput output = new ReadWeekByIdOutput(week);
             return Optional.of(output);
         } else {
             return Optional.empty();

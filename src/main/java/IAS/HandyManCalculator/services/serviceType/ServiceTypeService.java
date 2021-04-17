@@ -25,13 +25,13 @@ public class ServiceTypeService {
     }
 
     public CreateServiceTypeOperationOutput createServiceType(CreateServiceTypeOperationInput input) {
-        UUID productId = UUID.randomUUID();
-        ServiceType product = new ServiceType(
-                productId,
+        UUID serviceTypeId = UUID.randomUUID();
+        ServiceType serviceType = new ServiceType(
+                serviceTypeId,
                 input.getName()
         );
-        repository.storeService(product);
-        return new CreateServiceTypeOperationOutput(product);
+        repository.storeService(serviceType);
+        return new CreateServiceTypeOperationOutput(serviceType);
     }
 
     public List<ServiceType> listServices() {
@@ -39,10 +39,10 @@ public class ServiceTypeService {
     }
 
     public Optional<ReadServiceTypeByIdOutput> readServiceTypeByIdOperation(ReadServiceTypeByIdInput input) {
-        Optional<ServiceType> productById = repository.findServiceById(input.getId());
-        if (productById.isPresent()) {
-            ServiceType product = productById.get();
-            ReadServiceTypeByIdOutput output = new ReadServiceTypeByIdOutput(product);
+        Optional<ServiceType> serviceTypeById = repository.findServiceById(input.getId());
+        if (serviceTypeById.isPresent()) {
+            ServiceType serviceType = serviceTypeById.get();
+            ReadServiceTypeByIdOutput output = new ReadServiceTypeByIdOutput(serviceType);
             return Optional.of(output);
         } else {
             return Optional.empty();
