@@ -3,17 +3,13 @@ package IAS.HandyManCalculator.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import IAS.HandyManCalculator.commons.ControllerHandler;
-import IAS.HandyManCalculator.commons.OperationError;
-import IAS.HandyManCalculator.commons.OperationResult;
 import IAS.HandyManCalculator.domain.Week;
 import IAS.HandyManCalculator.model.week.*;
 import IAS.HandyManCalculator.services.week.CreateWeekUseCase;
 import IAS.HandyManCalculator.services.week.WeekService;
 import IAS.HandyManCalculator.services.week.ReadWeekByIdUseCase;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
