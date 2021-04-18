@@ -4,16 +4,15 @@ import IAS.HandyManCalculator.domain.Week;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface WeekRepository {
     void storeWeek(Week week);
 
     void updateWeek(Week week);
 
-    void deleteWeek(UUID id);
+    void deleteWeek(String id);
 
-    Optional<Week> findWeekById(UUID id);
+    Optional<Week> findWeekById(String id);
 
     List<Week> listWeeks();
 }

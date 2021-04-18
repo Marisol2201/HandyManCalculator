@@ -8,8 +8,6 @@ import IAS.HandyManCalculator.model.week.CreateWeekOperationOutput;
 import IAS.HandyManCalculator.repository.week.WeekRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 public class CreateWeekUseCase implements UseCase<CreateWeekOperationInput, CreateWeekOperationOutput> {
     private final WeekRepository repository;
@@ -20,10 +18,9 @@ public class CreateWeekUseCase implements UseCase<CreateWeekOperationInput, Crea
 
     @Override
     public OperationResult<CreateWeekOperationOutput> execute(CreateWeekOperationInput input) {
-        UUID weekId = UUID.randomUUID();
         Week week = new Week(
-                weekId,
-                input.getName()
+                input.getId(),
+                input.getHours()
         );
         repository.storeWeek(week);
         CreateWeekOperationOutput output = new CreateWeekOperationOutput(week);

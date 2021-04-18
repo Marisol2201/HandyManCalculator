@@ -1,13 +1,20 @@
 package IAS.HandyManCalculator.model.week;
 
 public class CreateWeekOperationInput {
-    private String name;
+    private String id;
+    private short hours;
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
+    }
+    public short getHours() {
+        return hours;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
+    }
+    public void setHours(short hours) {
+        this.hours = hours;
     }
 }

@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public class SQLWeekRepository implements WeekRepository {
@@ -25,10 +24,10 @@ public class SQLWeekRepository implements WeekRepository {
     }
 
     public void storeWeek(Week week) {
-        String sql = "INSERT INTO WEEKS(id, name) VALUES (?, ?)";
+        String sql = "INSERT INTO WEEKS(id, hours) VALUES (?, ?)";
         PreparedStatementSetter preparedStatementSetter = ps -> {
-            ps.setString(1, week.getId().toString());
-            ps.setString(2, week.getName());
+            ps.setString(1, week.getId());
+            ps.setShort(2, week.getHours());
         };
         jdbcTemplate.update(sql, preparedStatementSetter);
     }
@@ -40,33 +39,32 @@ public class SQLWeekRepository implements WeekRepository {
     }
 
     private Week weekRowMapper(ResultSet resultSet, int rowNum) throws SQLException {
-        String idString = resultSet.getString("id");
-        String name = resultSet.getString("name");
-        UUID id = UUID.fromString(idString);
-        return new Week(id, name);
+        String id = resultSet.getString("id");
+        short hours = resultSet.getShort("hours");
+        return new Week(id, hours);
     }
 
 
-    public Optional<Week> findWeekById(UUID id) {
+    public Optional<Week> findWeekById(String id) {
         String sql = "SELECT * FROM WEEKS WHERE id = ?";
-        PreparedStatementSetter setter = ps -> ps.setString(1, id.toString());
+        PreparedStatementSetter setter = ps -> ps.setString(1, id);
         List<Week> weeks = jdbcTemplate.query(sql, setter, this::weekRowMapper);
         Week unsafeWeek = DataAccessUtils.singleResult(weeks);
         return Optional.ofNullable(unsafeWeek);
     }
 
     public void updateWeek(Week weekUpdate) {
-        String sql = "UPDATE WEEKS SET name = :name WHERE id = :id";
+        String sql = "UPDATE WEEKS SET hours = :hours WHERE id = :id";
         Map<String, Object> parameters = Map.of(
-                "id", weekUpdate.getId().toString(),
-                "name", weekUpdate.getName()
+                "id", weekUpdate.getId(),
+                "hours", weekUpdate.getHours()
         );
         namedParameterJdbcTemplate.update(sql, parameters);
     }
 
-    public void deleteWeek(UUID id) {
+    public void deleteWeek(String id) {
         String sql = "DELETE FROM WEEKS WHERE id = ?";
-        PreparedStatementSetter setter = ps -> ps.setString(1, id.toString());
+        PreparedStatementSetter setter = ps -> ps.setString(1, id);
         jdbcTemplate.update(sql, setter);
     }
 }

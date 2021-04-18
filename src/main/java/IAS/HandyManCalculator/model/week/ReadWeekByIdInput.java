@@ -5,14 +5,14 @@ import IAS.HandyManCalculator.commons.Validate;
 import java.util.UUID;
 
 public class ReadWeekByIdInput {
-    private final UUID id;
+    private final String id;
 
-    public ReadWeekByIdInput(UUID id) {
+    public ReadWeekByIdInput(String id) {
         Validate.checkNotNull(id);
         this.id = id;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 }

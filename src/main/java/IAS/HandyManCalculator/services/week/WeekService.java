@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class WeekService {
@@ -18,10 +17,9 @@ public class WeekService {
     }
 
     public CreateWeekOperationOutput createWeek(CreateWeekOperationInput input) {
-        UUID weekId = UUID.randomUUID();
         Week week = new Week(
-                weekId,
-                input.getName()
+                input.getId(),
+                input.getHours()
     );
         repository.storeWeek(week);
         return new CreateWeekOperationOutput(week);
@@ -45,13 +43,13 @@ public class WeekService {
     public UpdateWeekOutput updateWeekOperation(
             UpdateWeekInput input
     ) {
-        UUID weekId = input.getId();
+        String weekId = input.getId();
         Optional<Week> weekById = repository.findWeekById(weekId);
         if (weekById.isPresent()) {
             Week dbWeek = weekById.get();
             Week weekUpdate = new Week(
                     dbWeek.getId(),
-                    input.getName()
+                    input.getHours()
             );
             repository.updateWeek(weekUpdate);
             return new UpdateWeekOutput(weekUpdate);
@@ -63,7 +61,7 @@ public class WeekService {
     public DeleteWeekOutput deleteWeekOperation(
             DeleteWeekInput input
     ) {
-        UUID weekId = input.getWeekId();
+        String weekId = input.getWeekId();
         Optional<Week> weekById = repository.findWeekById(weekId);
         if (weekById.isPresent()) {
             Week dbWeek = weekById.get();

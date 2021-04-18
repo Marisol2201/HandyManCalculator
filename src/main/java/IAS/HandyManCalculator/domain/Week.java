@@ -2,33 +2,22 @@ package IAS.HandyManCalculator.domain;
 
 import IAS.HandyManCalculator.commons.Validate;
 
-import java.util.UUID;
-
 public class Week {
-    private final UUID id;
-    private final String name;
+    private final String id;
+    private final short hours;
 
-    public Week(UUID id, String name) {
+    public Week(String id, short hours) {
         Validate.checkNotNull(id);
-        Validate.checkNotNull(name);
+        Validate.checkNotNull(hours);
         this.id = id;
-        this.name = name;
+        this.hours = hours;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Week{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public short getHours() {
+        return hours;
     }
 }

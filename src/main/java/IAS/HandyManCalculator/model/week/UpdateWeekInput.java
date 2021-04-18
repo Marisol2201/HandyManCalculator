@@ -1,24 +1,22 @@
 package IAS.HandyManCalculator.model.week;
 
-import java.util.UUID;
-
 public class UpdateWeekInput {
-    private UUID id;
-    private String name;
+    private String id;
+    private short hours;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public short getHours() {
+        return hours;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHours(short hours) {
+        this.hours = hours;
     }
 }

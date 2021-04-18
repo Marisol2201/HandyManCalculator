@@ -25,7 +25,7 @@ public class OperationResult<V> {
         return this.value != null;
     }
 
-    public IAS.HandyManCalculator.commons.OperationError getError() {
+    public OperationError getError() {
         return error;
     }
 

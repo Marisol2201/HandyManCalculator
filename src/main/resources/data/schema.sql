@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS TECHNICIANS(
 );
 
 CREATE TABLE IF NOT EXISTS WEEKS (
-    id varchar(40) primary key,
-    name varchar(5) not null
+    id varchar(5) primary key,
+    hours int(5) not null
 );
 
 CREATE TABLE IF NOT EXISTS SERVICES (

@@ -10,7 +10,6 @@ import IAS.HandyManCalculator.services.week.WeekService;
 import IAS.HandyManCalculator.services.week.ReadWeekByIdUseCase;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/weeks")
@@ -51,8 +50,8 @@ public class WeekController {
     ) {
         return new ControllerHandler<>(
                 () -> {
-                    UUID uuid = UUID.fromString(id);
-                    return new ReadWeekByIdInput(uuid);
+                    String weekId = id;
+                    return new ReadWeekByIdInput(weekId);
                 },
                 readWeekByIdUseCase
         )
@@ -68,7 +67,7 @@ public class WeekController {
 
     @DeleteMapping("/{weekId}")
     public DeleteWeekOutput deleteWeek(@PathVariable("weekId") String unsafeWeekId) {
-        UUID weekId = UUID.fromString(unsafeWeekId);
+        String weekId = unsafeWeekId;
         DeleteWeekInput input = new DeleteWeekInput(weekId);
         return service.deleteWeekOperation(input);
     }
