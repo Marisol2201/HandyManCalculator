@@ -1,5 +1,6 @@
 package IAS.HandyManCalculator.services.week;
 
+import IAS.HandyManCalculator.commons.CalculateTime;
 import IAS.HandyManCalculator.domain.Week;
 import IAS.HandyManCalculator.model.week.*;
 import IAS.HandyManCalculator.repository.week.WeekRepository;
@@ -17,9 +18,14 @@ public class WeekService {
     }
 
     public CreateWeekOperationOutput createWeek(CreateWeekOperationInput input) {
+
+        CalculateTime calculateTime = new CalculateTime(input.getDate());
+        short weekHours = calculateTime.differenceInHoursBetweenDates(input.getDate());
+        String weekNumber = calculateTime.calculateWeekNumber(input.getDate());
+
         Week week = new Week(
-                input.getId(),
-                input.getHours()
+                weekNumber,
+                weekHours
     );
         repository.storeWeek(week);
         return new CreateWeekOperationOutput(week);

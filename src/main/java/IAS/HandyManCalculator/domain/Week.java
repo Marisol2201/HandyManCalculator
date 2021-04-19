@@ -20,4 +20,6 @@ public class Week {
     public short getHours() {
         return hours;
     }
+
+
 }

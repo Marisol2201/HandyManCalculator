@@ -1,5 +1,6 @@
 package IAS.HandyManCalculator.services.week;
 
+import IAS.HandyManCalculator.commons.CalculateTime;
 import IAS.HandyManCalculator.commons.OperationResult;
 import IAS.HandyManCalculator.commons.UseCase;
 import IAS.HandyManCalculator.domain.Week;
@@ -18,9 +19,14 @@ public class CreateWeekUseCase implements UseCase<CreateWeekOperationInput, Crea
 
     @Override
     public OperationResult<CreateWeekOperationOutput> execute(CreateWeekOperationInput input) {
+
+        CalculateTime calculateTime = new CalculateTime(input.getDate());
+        short weekHours = calculateTime.differenceInHoursBetweenDates(input.getDate());
+        String weekNumber = calculateTime.calculateWeekNumber(input.getDate());
+
         Week week = new Week(
-                input.getId(),
-                input.getHours()
+                weekNumber,
+                weekHours
         );
         repository.storeWeek(week);
         CreateWeekOperationOutput output = new CreateWeekOperationOutput(week);
