@@ -30,12 +30,10 @@ public class WeekController {
 
     @PostMapping
     public ResponseEntity<Object> createWeek(
-            @RequestBody CreateWeekOperationInput input
-    ) {
+            @RequestBody CreateWeekOperationInput input) {
         return new ControllerHandler<>(
                 () -> input,
-                createWeek
-        )
+                createWeek)
                 .execute();
     }
 
@@ -46,27 +44,25 @@ public class WeekController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> readWeekById(
-            @PathVariable("id") String id
-    ) {
+            @PathVariable("id") String id) {
         return new ControllerHandler<>(
                 () -> {
                     String weekId = id;
                     return new ReadWeekByIdInput(weekId);
                 },
-                readWeekByIdUseCase
-        )
+                readWeekByIdUseCase)
                 .execute();
     }
 
     @PutMapping
     public UpdateWeekOutput updateWeek(
-            @RequestBody UpdateWeekInput input
-    ) {
+            @RequestBody UpdateWeekInput input) {
         return service.updateWeekOperation(input);
     }
 
-    @DeleteMapping("/{weekId}")
-    public DeleteWeekOutput deleteWeek(@PathVariable("weekId") String unsafeWeekId) {
+    @DeleteMapping
+    public DeleteWeekOutput deleteWeek(
+            @PathVariable("weekId") String unsafeWeekId) {
         String weekId = unsafeWeekId;
         DeleteWeekInput input = new DeleteWeekInput(weekId);
         return service.deleteWeekOperation(input);

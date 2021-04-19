@@ -1,3 +1,4 @@
+/*
 package IAS.HandyManCalculator.services.technician;
 import org.springframework.stereotype.Service;
 import IAS.HandyManCalculator.commons.OperationResult;
@@ -32,3 +33,4 @@ public class DeleteTechnicianUseCase implements UseCase<DeleteTechnicianInput, D
         }
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package IAS.HandyManCalculator.services.serviceType;
 
 import IAS.HandyManCalculator.commons.OperationResult;
@@ -30,3 +31,4 @@ public class CreateServiceTypeUseCase implements UseCase<CreateServiceTypeOperat
         return OperationResult.ofValue(output);
     }
 }
+*/

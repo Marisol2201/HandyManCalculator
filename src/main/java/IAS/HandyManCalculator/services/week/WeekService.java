@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class WeekService {
@@ -70,9 +71,9 @@ public class WeekService {
         }
     }
 
-    public DeleteWeekOutput deleteWeekOperation(
-            DeleteWeekInput input
-    ) {
+    //delete
+    public DeleteWeekOutput deleteWeekOperation(DeleteWeekInput input) {
+
         String weekId = input.getWeekId();
         Optional<Week> weekById = repository.findWeekById(weekId);
         if (weekById.isPresent()) {
