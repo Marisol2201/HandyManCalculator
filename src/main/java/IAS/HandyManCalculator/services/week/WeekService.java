@@ -17,11 +17,12 @@ public class WeekService {
         this.repository = repository;
     }
 
+    //post
     public CreateWeekOperationOutput createWeek(CreateWeekOperationInput input) {
 
-        CalculateTime calculateTime = new CalculateTime(input.getDate());
-        short weekHours = calculateTime.differenceInHoursBetweenDates(input.getDate());
-        String weekNumber = calculateTime.calculateWeekNumber(input.getDate());
+        CalculateTime calculateTime = new CalculateTime(input.getDates());
+        String weekNumber = calculateTime.calculateWeekNumber(input.getDates());
+        short weekHours = calculateTime.differenceInHoursBetweenDates(input.getDates());
 
         Week week = new Week(
                 weekNumber,
@@ -31,6 +32,7 @@ public class WeekService {
         return new CreateWeekOperationOutput(week);
     }
 
+    //get
     public List<Week> listWeeks() {
         return repository.listWeeks();
     }
@@ -46,16 +48,20 @@ public class WeekService {
         }
     }
 
-    public UpdateWeekOutput updateWeekOperation(
-            UpdateWeekInput input
-    ) {
-        String weekId = input.getId();
+    //put
+    public UpdateWeekOutput updateWeekOperation(UpdateWeekInput input) {
+
+        CalculateTime calculateTime = new CalculateTime(input.getDates());
+        String weekNumber = calculateTime.calculateWeekNumber(input.getDates());
+        short weekHours = calculateTime.differenceInHoursBetweenDates(input.getDates());
+
+        String weekId = weekNumber;
         Optional<Week> weekById = repository.findWeekById(weekId);
         if (weekById.isPresent()) {
             Week dbWeek = weekById.get();
             Week weekUpdate = new Week(
                     dbWeek.getId(),
-                    input.getHours()
+                    calculateTime.sumHours(weekHours, (dbWeek.getHours()))
             );
             repository.updateWeek(weekUpdate);
             return new UpdateWeekOutput(weekUpdate);

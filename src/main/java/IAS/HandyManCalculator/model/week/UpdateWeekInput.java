@@ -1,8 +1,11 @@
 package IAS.HandyManCalculator.model.week;
 
+import java.util.Date;
+import java.util.List;
+
 public class UpdateWeekInput {
     private String id;
-    private short hours;
+    private List<Date> dates;
 
     public String getId() {
         return id;
@@ -12,11 +15,11 @@ public class UpdateWeekInput {
         this.id = id;
     }
 
-    public short getHours() {
-        return hours;
+    public List<Date> getDates() {
+        return dates;
     }
 
-    public void setHours(short hours) {
-        this.hours = hours;
+    public void setDates(List<Date> dates) {
+        this.dates = dates;
     }
 }

@@ -30,4 +30,8 @@ public class CalculateTime {
         }
         return (short)hoursDifference;
     }
+
+    public short sumHours(short initialHours, short finalHours) {
+        return (short)(initialHours + finalHours);
+    }
 }

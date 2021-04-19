@@ -5,21 +5,21 @@ import java.util.List;
 
 public class CreateWeekOperationInput {
     private String id;
-    private List<Date> date;
+    private List<Date> dates;
 
     public String getId() {
         return id;
     }
 
-    public List<Date> getDate() {
-        return date;
+    public List<Date> getDates() {
+        return dates;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setDate(List<Date> date) {
-        this.date = date;
+    public void setDates(List<Date> dates) {
+        this.dates = dates;
     }
 }

@@ -20,9 +20,9 @@ public class CreateWeekUseCase implements UseCase<CreateWeekOperationInput, Crea
     @Override
     public OperationResult<CreateWeekOperationOutput> execute(CreateWeekOperationInput input) {
 
-        CalculateTime calculateTime = new CalculateTime(input.getDate());
-        short weekHours = calculateTime.differenceInHoursBetweenDates(input.getDate());
-        String weekNumber = calculateTime.calculateWeekNumber(input.getDate());
+        CalculateTime calculateTime = new CalculateTime(input.getDates());
+        String weekNumber = calculateTime.calculateWeekNumber(input.getDates());
+        short weekHours = calculateTime.differenceInHoursBetweenDates(input.getDates());
 
         Week week = new Week(
                 weekNumber,

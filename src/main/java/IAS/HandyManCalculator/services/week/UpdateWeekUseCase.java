@@ -22,10 +22,8 @@ public class UpdateWeekUseCase implements UseCase<UpdateWeekInput, UpdateWeekOut
     @Override
     public OperationResult<UpdateWeekOutput> execute(UpdateWeekInput input) {
         Optional<Week> weekById = repository.findWeekById(input.getId());
-        System.out.println("This is input: "+ input);
         if (weekById.isPresent()) {
             Week week = weekById.get();
-            System.out.println("This is week: "+ week);
             UpdateWeekOutput output = new UpdateWeekOutput(week);
             return OperationResult.ofValue(output);
         } else {
