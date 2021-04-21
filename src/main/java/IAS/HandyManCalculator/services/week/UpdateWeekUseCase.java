@@ -1,4 +1,3 @@
-/*
 package IAS.HandyManCalculator.services.week;
 
 import IAS.HandyManCalculator.commons.OperationResult;
@@ -35,4 +34,3 @@ public class UpdateWeekUseCase implements UseCase<UpdateWeekInput, UpdateWeekOut
     }
 }
 
-*/

@@ -3,13 +3,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class CalculateTime {
-
-    private final List<Date> date;
-
-    public CalculateTime(List<Date> date) {
-        this.date = date;
-    }
+public class CalculateWeek {
 
     public String calculateWeekNumber(List<Date> date) {
         Calendar calendar = Calendar.getInstance();

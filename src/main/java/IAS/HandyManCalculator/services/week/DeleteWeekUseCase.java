@@ -1,4 +1,3 @@
-/*
 package IAS.HandyManCalculator.services.week;
 
 import IAS.HandyManCalculator.commons.OperationResult;
@@ -34,4 +33,3 @@ public class DeleteWeekUseCase implements UseCase<DeleteWeekInput, DeleteWeekOut
         }
     }
 }
-*/

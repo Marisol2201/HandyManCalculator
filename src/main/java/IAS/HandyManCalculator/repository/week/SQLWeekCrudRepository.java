@@ -1,11 +1,9 @@
 package IAS.HandyManCalculator.repository.week;
 
 import IAS.HandyManCalculator.domain.Week;
-import IAS.HandyManCalculator.repository.week.WeekCRUDRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class SQLWeekCrudRepository implements WeekCRUDRepository {
     @Override

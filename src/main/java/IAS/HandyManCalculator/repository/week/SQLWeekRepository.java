@@ -24,10 +24,20 @@ public class SQLWeekRepository implements WeekRepository {
     }
 
     public void storeWeek(Week week) {
-        String sql = "INSERT INTO WEEKS(id, hours) VALUES (?, ?)";
+        String sql = "INSERT INTO WEEKS(id, totalWeekHours, totalWeekNormalHours, weekNormalDaytimeHours," +
+                "weekNormalNightHours, sundayNormalHours, totalWeekExtraHours, weekExtraDaytimeHours," +
+                "weekExtraNightHours, sundayExtraHours) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatementSetter preparedStatementSetter = ps -> {
             ps.setString(1, week.getId());
-            ps.setShort(2, week.getHours());
+            ps.setShort(2, week.getTotalWeekHours());
+            ps.setShort(3, week.getTotalWeekNormalHours());
+            ps.setShort(4, week.getWeekNormalDaytimeHours());
+            ps.setShort(5, week.getWeekNormalNightHours());
+            ps.setShort(6, week.getSundayNormalHours());
+            ps.setShort(7, week.getTotalWeekExtraHours());
+            ps.setShort(8, week.getWeekExtraDaytimeHours());
+            ps.setShort(9, week.getWeekExtraNightHours());
+            ps.setShort(10, week.getSundayExtraHours());
         };
         jdbcTemplate.update(sql, preparedStatementSetter);
     }
@@ -40,8 +50,17 @@ public class SQLWeekRepository implements WeekRepository {
 
     private Week weekRowMapper(ResultSet resultSet, int rowNum) throws SQLException {
         String id = resultSet.getString("id");
-        short hours = resultSet.getShort("hours");
-        return new Week(id, hours);
+        short totalWeekHours = resultSet.getShort("totalWeekHours");
+        short totalWeekNormalHours = resultSet.getShort("totalWeekNormalHours");
+        short weekNormalDaytimeHours = resultSet.getShort("weekNormalDaytimeHours");
+        short weekNormalNightHours = resultSet.getShort("weekNormalNightHours");
+        short sundayNormalHours = resultSet.getShort("sundayNormalHours");
+        short totalWeekExtraHours = resultSet.getShort("totalWeekExtraHours");
+        short weekExtraDaytimeHours = resultSet.getShort("weekExtraDaytimeHours");
+        short weekExtraNightHours = resultSet.getShort("weekExtraNightHours");
+        short sundayExtraHours = resultSet.getShort("sundayExtraHours");
+        return new Week(id, totalWeekHours, totalWeekNormalHours, weekNormalDaytimeHours, weekNormalNightHours,
+                sundayNormalHours, totalWeekExtraHours, weekExtraDaytimeHours, weekExtraNightHours, sundayExtraHours);
     }
 
 
@@ -57,7 +76,7 @@ public class SQLWeekRepository implements WeekRepository {
         String sql = "UPDATE WEEKS SET hours = :hours WHERE id = :id";
         Map<String, Object> parameters = Map.of(
                 "id", weekUpdate.getId(),
-                "hours", weekUpdate.getHours()
+                "hours", weekUpdate.getTotalWeekHours()
         );
         namedParameterJdbcTemplate.update(sql, parameters);
     }

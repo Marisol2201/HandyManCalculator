@@ -1,14 +1,15 @@
 package IAS.HandyManCalculator.services.week;
 
-import IAS.HandyManCalculator.commons.CalculateTime;
+import IAS.HandyManCalculator.commons.CalculateWeek;
+import IAS.HandyManCalculator.commons.OperationsWithNormalHours;
 import IAS.HandyManCalculator.domain.Week;
 import IAS.HandyManCalculator.model.week.*;
 import IAS.HandyManCalculator.repository.week.WeekRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class WeekService {
@@ -18,22 +19,41 @@ public class WeekService {
         this.repository = repository;
     }
 
-    //post
+    OperationsWithNormalHours operationsWithNormalHours = new OperationsWithNormalHours();
+    CalculateWeek calculateTime = new CalculateWeek();
+
+    //POST
     public CreateWeekOperationOutput createWeek(CreateWeekOperationInput input) {
 
-        CalculateTime calculateTime = new CalculateTime(input.getDates());
         String weekNumber = calculateTime.calculateWeekNumber(input.getDates());
-        short weekHours = calculateTime.differenceInHoursBetweenDates(input.getDates());
+        ArrayList result = operationsWithNormalHours.switchCase(input.getDates());
+        short totalWeekHours = (short) result.get(5);
+        short totalWeekNormalHours = (short) result.get(3);
+        short weekNormalDaytimeHours = (short) result.get(0);
+        short weekNormalNightHours = (short) result.get(1);
+        short sundayNormalHours = (short) result.get(2);
+        short totalWeekExtraHours = (short) result.get(4);
+        short weekExtraDaytimeHours = 0;
+        short weekExtraNightHours = 0;
+        short sundayExtraHours = 0;
 
         Week week = new Week(
                 weekNumber,
-                weekHours
-    );
+                totalWeekHours,
+                totalWeekNormalHours,
+                weekNormalDaytimeHours,
+                weekNormalNightHours,
+                sundayNormalHours,
+                totalWeekExtraHours,
+                weekExtraDaytimeHours,
+                weekExtraNightHours,
+                sundayExtraHours);
+
         repository.storeWeek(week);
         return new CreateWeekOperationOutput(week);
     }
 
-    //get
+    //GET
     public List<Week> listWeeks() {
         return repository.listWeeks();
     }
@@ -49,10 +69,10 @@ public class WeekService {
         }
     }
 
-    //put
+    //PUT
     public UpdateWeekOutput updateWeekOperation(UpdateWeekInput input) {
 
-        CalculateTime calculateTime = new CalculateTime(input.getDates());
+        CalculateWeek calculateTime = new CalculateWeek();
         String weekNumber = calculateTime.calculateWeekNumber(input.getDates());
         short weekHours = calculateTime.differenceInHoursBetweenDates(input.getDates());
 
@@ -62,8 +82,16 @@ public class WeekService {
             Week dbWeek = weekById.get();
             Week weekUpdate = new Week(
                     dbWeek.getId(),
-                    calculateTime.sumHours(weekHours, (dbWeek.getHours()))
-            );
+                    dbWeek.getTotalWeekHours(),
+                    dbWeek.getTotalWeekNormalHours(),
+                    dbWeek.getWeekNormalDaytimeHours(),
+                    dbWeek.getWeekNormalNightHours(),
+                    dbWeek.getSundayNormalHours(),
+                    dbWeek.getTotalWeekExtraHours(),
+                    dbWeek.getWeekExtraDaytimeHours(),
+                    dbWeek.getWeekExtraNightHours(),
+                    dbWeek.getSundayExtraHours());
+
             repository.updateWeek(weekUpdate);
             return new UpdateWeekOutput(weekUpdate);
         } else {
@@ -71,7 +99,7 @@ public class WeekService {
         }
     }
 
-    //delete
+    //DELETE
     public DeleteWeekOutput deleteWeekOperation(DeleteWeekInput input) {
 
         String weekId = input.getWeekId();
