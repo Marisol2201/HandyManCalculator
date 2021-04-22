@@ -33,7 +33,6 @@ public class HoursDuringTheWeek {
         int hours = calendar.get(Calendar.HOUR_OF_DAY);
         if ((hours > 7) && (hours < 20)) daytimeHours = (20 - hours);
         if ((hours < 7)) daytimeHours = 12;
-        System.out.println("daytimeHours first day: " + daytimeHours);
         return (short)daytimeHours;
     }
 
@@ -46,7 +45,6 @@ public class HoursDuringTheWeek {
         if (hours < 7) nightHours = ((7 - hours) + 4);
         if (hours > 20) nightHours = (24 - hours);
         if ((hours > 7)) nightHours = (4);
-        System.out.println("nightHours first day: " + nightHours);
         return (short)nightHours;
     }
 
@@ -59,7 +57,6 @@ public class HoursDuringTheWeek {
         int hours = calendar.get(Calendar.HOUR_OF_DAY);
         if ((hours > 7) && (hours < 20)) daytimeHours = ((20 - hours));
         if (hours > 20) daytimeHours = 12;
-        System.out.println("daytimeHours last day: " + daytimeHours);
         return (short)daytimeHours;
     }
 
@@ -71,7 +68,6 @@ public class HoursDuringTheWeek {
         int hours = calendar.get(Calendar.HOUR_OF_DAY);
         if (hours < 7) nightHours = hours;
         if (hours > 20) nightHours = ((hours - 20) + 7);
-        System.out.println("nightHours last day: " + nightHours);
         return (short)nightHours;
     }
 }

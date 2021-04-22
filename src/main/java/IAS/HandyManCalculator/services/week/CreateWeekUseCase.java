@@ -21,12 +21,12 @@ public class CreateWeekUseCase implements UseCase<CreateWeekOperationInput, Crea
     }
 
     OperationsWithNormalHours operationsWithNormalHours = new OperationsWithNormalHours();
-    CalculateWeek calculateTime = new CalculateWeek();
+    CalculateWeek calculateWeek = new CalculateWeek();
 
     @Override
     public OperationResult<CreateWeekOperationOutput> execute(CreateWeekOperationInput input) {
 
-        String weekNumber = calculateTime.calculateWeekNumber(input.getDates());
+        String weekNumber = calculateWeek.calculateWeekNumber(input.getDates());
         ArrayList result = operationsWithNormalHours.switchCase(input.getDates());
         short totalWeekHours = (short) result.get(5);
         short totalWeekNormalHours = (short) result.get(3);

@@ -20,12 +20,13 @@ public class WeekService {
     }
 
     OperationsWithNormalHours operationsWithNormalHours = new OperationsWithNormalHours();
-    CalculateWeek calculateTime = new CalculateWeek();
+    OperationsWithNormalHours operationsWithExtraHours = new OperationsWithNormalHours();
+    CalculateWeek calculateWeek = new CalculateWeek();
 
     //POST
     public CreateWeekOperationOutput createWeek(CreateWeekOperationInput input) {
 
-        String weekNumber = calculateTime.calculateWeekNumber(input.getDates());
+        String weekNumber = calculateWeek.calculateWeekNumber(input.getDates());
         ArrayList result = operationsWithNormalHours.switchCase(input.getDates());
         short totalWeekHours = (short) result.get(5);
         short totalWeekNormalHours = (short) result.get(3);
@@ -33,9 +34,9 @@ public class WeekService {
         short weekNormalNightHours = (short) result.get(1);
         short sundayNormalHours = (short) result.get(2);
         short totalWeekExtraHours = (short) result.get(4);
-        short weekExtraDaytimeHours = 0;
-        short weekExtraNightHours = 0;
-        short sundayExtraHours = 0;
+        short weekExtraDaytimeHours = (short) result.get(8);
+        short weekExtraNightHours = (short) result.get(7);
+        short sundayExtraHours = (short) result.get(6);
 
         Week week = new Week(
                 weekNumber,
@@ -72,26 +73,30 @@ public class WeekService {
     //PUT
     public UpdateWeekOutput updateWeekOperation(UpdateWeekInput input) {
 
-        CalculateWeek calculateTime = new CalculateWeek();
-        String weekNumber = calculateTime.calculateWeekNumber(input.getDates());
-        short weekHours = calculateTime.differenceInHoursBetweenDates(input.getDates());
+        String weekNumber = calculateWeek.calculateWeekNumber(input.getDates());
 
         String weekId = weekNumber;
         Optional<Week> weekById = repository.findWeekById(weekId);
         if (weekById.isPresent()) {
             Week dbWeek = weekById.get();
+            List<Short> result = new ArrayList();
+            if (dbWeek.getTotalWeekHours() < 48) {
+                result = operationsWithNormalHours.switchCase(input.getDates());
+            } else {
+                result = operationsWithExtraHours.switchCase(input.getDates());
+            }
             Week weekUpdate = new Week(
                     dbWeek.getId(),
-                    dbWeek.getTotalWeekHours(),
-                    dbWeek.getTotalWeekNormalHours(),
-                    dbWeek.getWeekNormalDaytimeHours(),
-                    dbWeek.getWeekNormalNightHours(),
-                    dbWeek.getSundayNormalHours(),
-                    dbWeek.getTotalWeekExtraHours(),
-                    dbWeek.getWeekExtraDaytimeHours(),
-                    dbWeek.getWeekExtraNightHours(),
-                    dbWeek.getSundayExtraHours());
-
+                    calculateWeek.sumHours(result.get(5), (dbWeek.getTotalWeekHours())),
+                    calculateWeek.sumHours(result.get(3), (dbWeek.getTotalWeekNormalHours())),
+                    calculateWeek.sumHours(result.get(0), (dbWeek.getWeekNormalDaytimeHours())),
+                    calculateWeek.sumHours(result.get(1), (dbWeek.getWeekNormalNightHours())),
+                    calculateWeek.sumHours(result.get(2), (dbWeek.getSundayNormalHours())),
+                    calculateWeek.sumHours(result.get(4), (dbWeek.getTotalWeekExtraHours())),
+                    calculateWeek.sumHours(result.get(8), (dbWeek.getWeekExtraDaytimeHours())),
+                    calculateWeek.sumHours(result.get(7), (dbWeek.getWeekExtraNightHours())),
+                    calculateWeek.sumHours(result.get(6), (dbWeek.getSundayExtraHours()))
+            );
             repository.updateWeek(weekUpdate);
             return new UpdateWeekOutput(weekUpdate);
         } else {

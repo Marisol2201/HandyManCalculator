@@ -12,19 +12,6 @@ public class CalculateWeek {
         return weekNumber + "";
     }
 
-    public short differenceInHoursBetweenDates(List<Date> date) {
-        Date startDate = (date.get(0));
-        Date endDate = (date.get(date.size() - 1));
-        int hoursDifference = 0;
-        if (startDate.before(endDate)) {
-            long diff = endDate.getTime() - startDate.getTime();
-            hoursDifference = (int) (diff / (60 * 60 * 1000));
-        } else {
-            System.out.println("The final date is before the initial date");
-        }
-        return (short)hoursDifference;
-    }
-
     public short sumHours(short initialHours, short finalHours) {
         return (short)(initialHours + finalHours);
     }

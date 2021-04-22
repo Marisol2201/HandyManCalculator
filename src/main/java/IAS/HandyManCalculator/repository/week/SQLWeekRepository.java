@@ -73,10 +73,22 @@ public class SQLWeekRepository implements WeekRepository {
     }
 
     public void updateWeek(Week weekUpdate) {
-        String sql = "UPDATE WEEKS SET hours = :hours WHERE id = :id";
+        String sql = "UPDATE WEEKS SET totalWeekHours = :totalWeekHours, totalWeekNormalHours = :totalWeekNormalHours, " +
+                "weekNormalDaytimeHours = :weekNormalDaytimeHours, weekNormalNightHours = :weekNormalNightHours, " +
+                "sundayNormalHours = :sundayNormalHours, totalWeekExtraHours = :totalWeekExtraHours, " +
+                "weekExtraDaytimeHours = :weekExtraDaytimeHours, weekExtraNightHours = :weekExtraNightHours," +
+                "sundayExtraHours = :sundayExtraHours WHERE id = :id";
         Map<String, Object> parameters = Map.of(
                 "id", weekUpdate.getId(),
-                "hours", weekUpdate.getTotalWeekHours()
+                "totalWeekHours", weekUpdate.getTotalWeekHours(),
+                "totalWeekNormalHours", weekUpdate.getTotalWeekNormalHours(),
+                "weekNormalDaytimeHours", weekUpdate.getWeekNormalDaytimeHours(),
+                "weekNormalNightHours", weekUpdate.getWeekNormalNightHours(),
+                "sundayNormalHours", weekUpdate.getSundayNormalHours(),
+                "totalWeekExtraHours", weekUpdate.getTotalWeekExtraHours(),
+                "weekExtraDaytimeHours", weekUpdate.getWeekExtraDaytimeHours(),
+                "weekExtraNightHours", weekUpdate.getWeekExtraNightHours(),
+                "sundayExtraHours", weekUpdate.getSundayExtraHours()
         );
         namedParameterJdbcTemplate.update(sql, parameters);
     }

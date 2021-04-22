@@ -14,21 +14,19 @@ public class OperationsWithNormalHours {
         short weekNormalDaytimeHours = 0;
         short weekNormalNightHours = 0;
         short sundayNormalHours = 0;
-
         short totalWeekExtraHours = 0;
+        short weekExtraDaytimeHours = 0;
+        short weekExtraNightHours = 0;
+        short sundayExtraHours = 0;
 
         //LIST > 2 & SUNDAY IS THE LAST DAY
         if ((dates.size() > 2) && (sunday.IsSunday(dates))) {
             weekNormalDaytimeHours = (short) ((normalAndExtra.daytimeHoursFirstDay(dates)) +
                     normalAndExtra.daytimeHoursMiddleDates(dates));
-
             weekNormalNightHours = (short) (normalAndExtra.nightHoursFirstDay(dates) +
                     normalAndExtra.nightHoursMiddleDates(dates));
-
             sundayNormalHours = sunday.sundayHoursSeveralDays(dates);
-
             totalWeekNormalHours = (short) (weekNormalDaytimeHours + weekNormalNightHours + sundayNormalHours);
-
         }
 
         //LIST == 2 & TWO DATES ARE THE SAME DATE & IS SUNDAY
@@ -49,19 +47,15 @@ public class OperationsWithNormalHours {
         if ((dates.size() > 2) && (!sunday.IsSunday(dates))) {
             weekNormalDaytimeHours = (short) ((normalAndExtra.daytimeHoursFirstDay(dates)) +
                     normalAndExtra.daytimeHoursMiddleDates(dates) + normalAndExtra.daytimeHoursLastDay(dates));
-
             weekNormalNightHours = (short) ((normalAndExtra.nightHoursFirstDay(dates)) +
                     normalAndExtra.nightHoursMiddleDates(dates) + normalAndExtra.nightHoursLastDay(dates));
-
             totalWeekNormalHours = (short) (weekNormalDaytimeHours + weekNormalNightHours + sundayNormalHours);
         }
 
         //LIST == 2 & SUNDAY IS NOT IN THE LIST & TWO DATES ARE THE SAME DATE
         if ((dates.size() == 2) && (!sunday.IsSunday(dates))) {
             weekNormalDaytimeHours = sunday.daytimeHoursWithOneDate(dates);
-
             weekNormalNightHours = sunday.nightHoursWithOneDate(dates);
-
             totalWeekNormalHours = (short) (weekNormalDaytimeHours + weekNormalNightHours + sundayNormalHours);
         }
 
@@ -69,15 +63,14 @@ public class OperationsWithNormalHours {
         if ((dates.size() == 2) && (!sunday.IsSunday(dates)) && (dates.get(0)) != (dates.get(dates.size() - 1))) {
             weekNormalDaytimeHours = (short) ((normalAndExtra.daytimeHoursFirstDay(dates)) +
                     normalAndExtra.daytimeHoursLastDay(dates));
-
             weekNormalNightHours = (short) ((normalAndExtra.nightHoursFirstDay(dates)) +
                     normalAndExtra.nightHoursLastDay(dates));
-
             totalWeekNormalHours = (short) (weekNormalDaytimeHours + weekNormalNightHours + sundayNormalHours);
         }
 
+        //IF NORMAL HOURS ARE MORE THAN 48
         if (totalWeekNormalHours > 48) {
-            totalWeekExtraHours = (short) (totalWeekExtraHours - 48);
+            totalWeekExtraHours = (short) (totalWeekNormalHours - 48);
         }
 
         short totalWeekHours = (short) (totalWeekNormalHours + totalWeekExtraHours);
@@ -88,6 +81,9 @@ public class OperationsWithNormalHours {
         result.add(totalWeekNormalHours);
         result.add(totalWeekExtraHours);
         result.add(totalWeekHours);
+        result.add(sundayExtraHours);
+        result.add(weekExtraNightHours);
+        result.add(weekExtraDaytimeHours);
         return result;
     }
 }
