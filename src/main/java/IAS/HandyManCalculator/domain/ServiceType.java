@@ -4,11 +4,11 @@ import IAS.HandyManCalculator.commons.Validate;
 
 import java.util.UUID;
 
-public class Technician {
+public class ServiceType {
     private final UUID id;
     private final String name;
 
-    public Technician(UUID id, String name) {
+    public ServiceType(UUID id, String name) {
         Validate.checkNotNull(id);
         Validate.checkNotNull(name);
         this.id = id;
@@ -26,7 +26,7 @@ public class Technician {
 
     @Override
     public String toString() {
-        return "Technician{" +
+        return "ServiceType{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

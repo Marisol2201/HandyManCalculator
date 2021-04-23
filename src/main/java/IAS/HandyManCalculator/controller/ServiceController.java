@@ -1,49 +1,75 @@
 package IAS.HandyManCalculator.controller;
 
-import IAS.HandyManCalculator.domain.Service;
-import IAS.HandyManCalculator.repository.ServiceRepository;
+import IAS.HandyManCalculator.domain.ServiceType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import IAS.HandyManCalculator.commons.ControllerHandler;
+import IAS.HandyManCalculator.model.serviceType.*;
+import IAS.HandyManCalculator.services.serviceType.CreateServiceTypeUseCase;
+import IAS.HandyManCalculator.services.serviceType.ServiceTypeService;
+import IAS.HandyManCalculator.services.serviceType.ReadServiceTypeByIdUseCase;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/service")
+@RequestMapping("/services")
 public class ServiceController {
+    private final ServiceTypeService service;
+    private final CreateServiceTypeUseCase createService;
+    private final ReadServiceTypeByIdUseCase readServiceTypeByIdUseCase;
 
-    private final ServiceRepository repository;
-
-    public ServiceController(ServiceRepository repository) {
-        this.repository = repository;
+    public ServiceController(
+            ServiceTypeService service,
+            CreateServiceTypeUseCase createService,
+            ReadServiceTypeByIdUseCase readServiceTypeByIdUseCase
+    ) {
+        this.service = service;
+        this.createService = createService;
+        this.readServiceTypeByIdUseCase = readServiceTypeByIdUseCase;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Object> listService() {
-        return repository.listService();
+    @PostMapping
+    public ResponseEntity<Object> createService(
+            @RequestBody CreateServiceTypeOperationInput input
+    ) {
+        return new ControllerHandler<>(
+                () -> input,
+                createService
+        )
+                .execute();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void createService(
-            @RequestBody Service transaction) {
-        repository.createService(transaction);
+    @GetMapping
+    public List<ServiceType> listServices() {
+        return service.listServices();
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteService(
-            @RequestBody Service transaction) {
-        repository.deleteService(transaction);
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> readServiceById(
+            @PathVariable("id") String id
+    ) {
+        return new ControllerHandler<>(
+                () -> {
+                    UUID uuid = UUID.fromString(id);
+                    return new ReadServiceTypeByIdInput(uuid);
+                },
+                readServiceTypeByIdUseCase
+        )
+                .execute();
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public void updateService(
-            @PathVariable final int id,
-            @RequestBody Service transaction) {
-        repository.updateService(transaction);
+    @PutMapping
+    public UpdateServiceTypeOutput updateService(
+            @RequestBody UpdateServiceTypeInput input
+    ) {
+        return service.updateServiceOperation(input);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Object getOneService(
-            @PathVariable final int id) {
-        return repository.getOneService(id);
+    @DeleteMapping("/{serviceId}")
+    public DeleteServiceTypeOutput deleteService(@PathVariable("serviceId") String unsafeServiceId) {
+        UUID serviceId = UUID.fromString(unsafeServiceId);
+        DeleteServiceTypeInput input = new DeleteServiceTypeInput(serviceId);
+        return service.deleteServiceOperation(input);
     }
 }
