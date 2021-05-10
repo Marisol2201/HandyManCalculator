@@ -3,17 +3,19 @@ package IAS.HandyManCalculator.commons;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class HoursDuringTheWeek {
     Calendar calendar = Calendar.getInstance();
 
     //MIDDLE DATES DAYTIME
     public short daytimeHoursMiddleDates(List<Date> date) {
-        short middleDates = 0;
-        for (Date d: date) {
-            if ((d != (date.get(0))) && d != ((date.get(date.size() - 1)))) middleDates++;
-        }
-        return (short)(middleDates * 13);
+        AtomicReference<Short> middleDates = new AtomicReference<>((short) 0);
+        date.stream().forEach(d -> {
+            if ((d != (date.get(0))) && d != ((date.get(date.size() - 1))))
+                middleDates.getAndSet((short) (middleDates.get() + 1));
+        });
+        return (short) (middleDates.get() * 13);
     }
 
     //MIDDLE DATES NIGHT
