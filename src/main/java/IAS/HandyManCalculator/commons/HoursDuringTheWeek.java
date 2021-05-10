@@ -10,12 +10,9 @@ public class HoursDuringTheWeek {
 
     //MIDDLE DATES DAYTIME
     public short daytimeHoursMiddleDates(List<Date> date) {
-        AtomicReference<Short> middleDates = new AtomicReference<>((short) 0);
-        date.stream().forEach(d -> {
-            if ((d != (date.get(0))) && d != ((date.get(date.size() - 1))))
-                middleDates.getAndSet((short) (middleDates.get() + 1));
-        });
-        return (short) (middleDates.get() * 13);
+        return ((short) (date.stream()
+                .filter(d -> d != date.get(0) && d != date.get(date.size() - 1))
+                .count() * (13)));
     }
 
     //MIDDLE DATES NIGHT
@@ -52,7 +49,6 @@ public class HoursDuringTheWeek {
 
     //LAST DATE DAYTIME
     public short daytimeHoursLastDay(List<Date> date) {
-        System.out.println(date);
         Date startDate = (date.get(date.size() - 1));
         int daytimeHours = 0;
         calendar.setTime(startDate);
