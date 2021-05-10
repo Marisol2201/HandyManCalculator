@@ -3,6 +3,7 @@ package IAS.HandyManCalculator.commons;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class HoursDuringTheWeek {
     Calendar calendar = Calendar.getInstance();
