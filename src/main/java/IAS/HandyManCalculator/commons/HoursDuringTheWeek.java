@@ -9,11 +9,9 @@ public class HoursDuringTheWeek {
 
     //MIDDLE DATES DAYTIME
     public short daytimeHoursMiddleDates(List<Date> date) {
-        short middleDates = 0;
-        for (Date d: date) {
-            if ((d != (date.get(0))) && d != ((date.get(date.size() - 1)))) middleDates++;
-        }
-        return (short)(middleDates * 13);
+        return ((short) (date.stream()
+                .filter(d -> d != date.get(0) && d != date.get(date.size() - 1))
+                .count() * (13)));
     }
 
     //MIDDLE DATES NIGHT
@@ -50,7 +48,6 @@ public class HoursDuringTheWeek {
 
     //LAST DATE DAYTIME
     public short daytimeHoursLastDay(List<Date> date) {
-        System.out.println(date);
         Date startDate = (date.get(date.size() - 1));
         int daytimeHours = 0;
         calendar.setTime(startDate);
