@@ -10,3 +10,4 @@ public class HandyManCalculatorApplication {
 		SpringApplication.run(HandyManCalculatorApplication.class, args);
 	}
 }
+
