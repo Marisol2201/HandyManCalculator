@@ -42,7 +42,7 @@ public class ControllerHandler<INPUT, OUTPUT> {
         }
     }
 
-    private ResponseEntity<Object> parseError(IAS.HandyManCalculator.commons.OperationError error) {
+    private ResponseEntity<Object> parseError(OperationError error) {
         return ResponseEntity.status(error.httpCode())
                 .body(error.content());
     }

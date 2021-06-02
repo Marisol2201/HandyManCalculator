@@ -75,15 +75,15 @@ public class OperationsWithNormalHours {
 
         short totalWeekHours = (short) (totalWeekNormalHours + totalWeekExtraHours);
         ArrayList<Short> result = new ArrayList();
+        result.add(totalWeekHours);
+        result.add(totalWeekNormalHours);
         result.add(weekNormalDaytimeHours);
         result.add(weekNormalNightHours);
         result.add(sundayNormalHours);
-        result.add(totalWeekNormalHours);
         result.add(totalWeekExtraHours);
-        result.add(totalWeekHours);
-        result.add(sundayExtraHours);
-        result.add(weekExtraNightHours);
         result.add(weekExtraDaytimeHours);
+        result.add(weekExtraNightHours);
+        result.add(sundayExtraHours);
         return result;
     }
 }

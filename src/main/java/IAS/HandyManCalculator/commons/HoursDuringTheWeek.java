@@ -17,11 +17,9 @@ public class HoursDuringTheWeek {
 
     //MIDDLE DATES NIGHT
     public short nightHoursMiddleDates(List<Date> date) {
-        short middleDates = 0;
-        for (Date d: date) {
-            if ((d != (date.get(0))) && d != ((date.get(date.size() - 1)))) middleDates++;
-        }
-        return (short)(middleDates * 11);
+        return ((short) (date.stream()
+                .filter(d -> d != date.get(0) && d != date.get(date.size() - 1))
+                .count() * (11)));
     }
 
     //FIRST DATE DAYTIME

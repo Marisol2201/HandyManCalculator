@@ -1,17 +1,18 @@
 package IAS.HandyManCalculator.repository;
 
-import java.util.List;
-import java.util.Optional;
+import IAS.HandyManCalculator.domain.Week;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 // This is an exploration class
 public interface CrudRepository<TYPE, ID> {
-    void store(TYPE item);
+    Mono<Object> store(TYPE item);
 
-    void update(TYPE item);
+    Mono<Object> update(TYPE item);
 
-    void delete(ID id);
+    Mono<Object> delete(ID id);
 
-    Optional<TYPE> findById(ID id);
+    Mono<Week> findById(ID id);
 
-    List<TYPE> list();
+    Flux<Week> list();
 }
